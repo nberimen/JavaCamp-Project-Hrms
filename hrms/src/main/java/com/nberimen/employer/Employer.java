@@ -1,4 +1,4 @@
-package com.nberimen.employers;
+package com.nberimen.employer;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
