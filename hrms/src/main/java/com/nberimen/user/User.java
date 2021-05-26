@@ -8,24 +8,32 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name = "user")
+@Table(name = "users")
 @Data
+@NoArgsConstructor
 public class User {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id")
 	private int id;
 	
-	@Column(name = "email",nullable = false,unique = true)
+	@Column(nullable = false,unique = true)
 	private String email;
 	
-	@Column(name="password",nullable = false)
+	@Column(nullable = false)
 	private String password;
 	
-	@Column(name="verified",nullable = false)
+	@Column(nullable = false)
 	private boolean verified;
+
+	public User(String email, String password, boolean verified) {
+		this.email = email;
+		this.password = password;
+		this.verified = verified;
+	}
+	
 	
 }
