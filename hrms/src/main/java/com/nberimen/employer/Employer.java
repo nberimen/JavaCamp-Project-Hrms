@@ -1,5 +1,6 @@
 package com.nberimen.employer;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -31,7 +32,10 @@ public class Employer {
 	@Column(name = "phone",nullable = false)
 	private String phoneNumber;
 	
-	@OneToOne(optional = false)
+	@Column(nullable = false)
+	private boolean verified;
+	
+	@OneToOne(optional = false, cascade = CascadeType.ALL)
 	private User user;
 	
 }
