@@ -13,12 +13,12 @@ public class UserDto {
 	
 	private String email;
 
-	private boolean enabled;
+	private boolean verified;
 	
 	public UserDto(User user) { 
 		setId(user.getId());
 		setEmail(user.getEmail());
-		setEnabled(user.isVerified());
+		setVerified(user.isVerified());
 	}
 
 }
