@@ -10,6 +10,7 @@ import com.nberimen.core.utilities.ErrorResult;
 import com.nberimen.core.utilities.Result;
 import com.nberimen.core.utilities.SuccessDataResult;
 import com.nberimen.core.utilities.SuccessResult;
+import com.nberimen.jobposition.dto.JobPositionDto;
 
 @Service
 public class JobPositionManager implements JobPositionService {
@@ -26,10 +27,12 @@ public class JobPositionManager implements JobPositionService {
 		return new SuccessDataResult<List<JobPosition>>(this.jobPositionDao.findAll(),"Posizyonlar Listelendi");
 	}
 	@Override
-	public Result add(JobPosition jobPosition) {
-		if(jobPositionDao.findByPositionName(jobPosition.getPositionName())) {
+	public Result add(JobPositionDto jobPositionDto) {
+		if(jobPositionDao.findByPositionName(jobPositionDto.getPositionName())!=null) {
 			return new ErrorResult("Pozisyon zaten mevcut.");
 		}
+		JobPosition jobPosition=new JobPosition();
+		jobPosition.setPositionName(jobPositionDto.getPositionName());
 		this.jobPositionDao.save(jobPosition);
 		return new SuccessResult("Posizyon Eklendi");
 	}
