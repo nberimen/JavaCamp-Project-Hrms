@@ -1,35 +1,36 @@
 package com.nberimen.employer;
 
+import java.util.List;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
-import javax.persistence.Table;
 
+import com.nberimen.jobadvert.JobAdvert;
 import com.nberimen.user.User;
 
 import lombok.Data;
 
 @Entity
-@Table(name = "employer")
 @Data
 public class Employer {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "employer_id")
 	private int id;
 	
-	@Column(name="company_name", nullable = false)
+	@Column(nullable = false)
 	private String companyName;
 	
-	@Column(name = "web_site",nullable = false)
+	@Column(nullable = false)
 	private String webSite;
 	
-	@Column(name = "phone",nullable = false)
+	@Column(nullable = false)
 	private String phoneNumber;
 	
 	@Column(nullable = false)
@@ -37,5 +38,8 @@ public class Employer {
 	
 	@OneToOne(optional = false, cascade = CascadeType.ALL)
 	private User user;
+	
+	@OneToMany(mappedBy = "employer")
+	private List<JobAdvert> jobAdverts;
 	
 }
