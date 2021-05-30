@@ -7,37 +7,68 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
+import javax.persistence.ManyToOne;
 
+import com.nberimen.city.City;
+import com.nberimen.employer.Employer;
 import com.nberimen.jobposition.JobPosition;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name = "job_advert")
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class JobAdvert {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	
-	@Column(nullable = true)
+	@Column(nullable = false)
 	private String description;
 	
-	@Column(name="min_salary",nullable = false)
 	private double minSalary;
 	
-	@Column(name="max_salary",nullable = false)
 	private double maxSalary;
 	
-	private int position;
+	@Column(nullable = false)
+	private int openPositionNumber;
 	
-	@Column(nullable = true)
+	@Column(nullable = false)
 	private LocalDate deadline;
 	
-	@OneToOne(optional = false)
+	@Column(nullable = false)
+	private LocalDate publishingDate;
+	
+	@Column(nullable = false)
+	private boolean active;
+	
+	@ManyToOne(optional = false)
 	private JobPosition jobPosition;
+	
+	@ManyToOne(optional = false)
+	private City city;
+	
+	@ManyToOne(optional = false)
+	private Employer employer;
+
+	public JobAdvert(String description, double minSalary, double maxSalary, int openPositionNumber, LocalDate deadline,
+			LocalDate publishingDate, boolean active, JobPosition jobPosition, City city, Employer employer) {
+		this.description = description;
+		this.minSalary = minSalary;
+		this.maxSalary = maxSalary;
+		this.openPositionNumber = openPositionNumber;
+		this.deadline = deadline;
+		this.publishingDate = publishingDate;
+		this.active = active;
+		this.jobPosition = jobPosition;
+		this.city = city;
+		this.employer = employer;
+	}
+	
+	
 	
 }
