@@ -17,7 +17,7 @@ public class CandidateDto {
 	@NotEmpty
 	private String lastName;
 	
-	@NotEmpty
+	//@NotEmpty
 	private LocalDate dateOfBirth;
 	
 	@NotEmpty

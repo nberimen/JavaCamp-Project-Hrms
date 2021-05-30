@@ -43,6 +43,5 @@ public class CandidateController {
 		User user = new User(candidateDto.getEmail(),candidateDto.getPassword(),false);
 		candidate.setUser(user);
 		return candidateService.register(candidate);
-		//return new SuccessDataResult<Candidate>(candidate,"başarılı");
 	}
 }

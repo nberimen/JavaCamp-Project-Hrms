@@ -9,7 +9,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
-import javax.persistence.Table;
 
 import com.nberimen.user.User;
 
@@ -17,26 +16,24 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name = "candidate")
 @Data
 @NoArgsConstructor
 public class Candidate {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "candidate_id")
 	private int id;
 	
-	@Column(name = "first_name",nullable = false)
+	@Column(nullable = false)
 	private String firstName;
 	
-	@Column(name="last_name",nullable = false)
+	@Column(nullable = false)
 	private String lastName;
 	
-	@Column(name = "date_of_birth" ,nullable = true)
+	@Column(nullable = true)
 	private LocalDate dateOfBirth;
 	
-	@Column(name="nationality_id",length = 11,nullable = false,unique = false)
+	@Column(length = 11,nullable = false,unique = false)
 	private String nationalityId;
 	
 	@OneToOne(optional = false,cascade = CascadeType.ALL)
