@@ -5,8 +5,10 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.nberimen.core.utilities.DataResult;
-import com.nberimen.core.utilities.SuccessDataResult;
+import com.nberimen.utilities.result.DataResult;
+import com.nberimen.utilities.result.Result;
+import com.nberimen.utilities.result.SuccessDataResult;
+import com.nberimen.utilities.result.SuccessResult;
 
 @Service
 public class CityManager implements CityService{
@@ -22,6 +24,12 @@ public class CityManager implements CityService{
 	public DataResult<List<City>> gettAll() {
 		
 		return new SuccessDataResult<List<City>>(this.cityDao.findAll(),"Şehirler Listelendi.");
+	}
+
+	@Override
+	public Result register(City city) {
+		cityDao.save(city);
+		return new SuccessResult("Şehir Eklendi") ;
 	}
 
 }

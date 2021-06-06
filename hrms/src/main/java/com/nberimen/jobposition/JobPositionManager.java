@@ -5,12 +5,11 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.nberimen.core.utilities.DataResult;
-import com.nberimen.core.utilities.ErrorResult;
-import com.nberimen.core.utilities.Result;
-import com.nberimen.core.utilities.SuccessDataResult;
-import com.nberimen.core.utilities.SuccessResult;
-import com.nberimen.jobposition.dto.JobPositionDto;
+import com.nberimen.utilities.result.DataResult;
+import com.nberimen.utilities.result.ErrorResult;
+import com.nberimen.utilities.result.Result;
+import com.nberimen.utilities.result.SuccessDataResult;
+import com.nberimen.utilities.result.SuccessResult;
 
 @Service
 public class JobPositionManager implements JobPositionService {
@@ -27,12 +26,10 @@ public class JobPositionManager implements JobPositionService {
 		return new SuccessDataResult<List<JobPosition>>(this.jobPositionDao.findAll(),"Posizyonlar Listelendi");
 	}
 	@Override
-	public Result add(JobPositionDto jobPositionDto) {
-		if(jobPositionDao.findByPositionName(jobPositionDto.getPositionName())!=null) {
+	public Result add(JobPosition jobPosition) {
+		if(jobPositionDao.findByPositionName(jobPosition.getPositionName())!=null) {
 			return new ErrorResult("Pozisyon zaten mevcut.");
 		}
-		JobPosition jobPosition=new JobPosition();
-		jobPosition.setPositionName(jobPositionDto.getPositionName());
 		this.jobPositionDao.save(jobPosition);
 		return new SuccessResult("Posizyon Eklendi");
 	}

@@ -54,21 +54,5 @@ public class JobAdvert {
 	
 	@ManyToOne(optional = false)
 	private Employer employer;
-
-	public JobAdvert(String description, double minSalary, double maxSalary, int openPositionNumber, LocalDate deadline,
-			LocalDate publishingDate, boolean active, JobPosition jobPosition, City city, Employer employer) {
-		this.description = description;
-		this.minSalary = minSalary;
-		this.maxSalary = maxSalary;
-		this.openPositionNumber = openPositionNumber;
-		this.deadline = deadline;
-		this.publishingDate = publishingDate;
-		this.active = active;
-		this.jobPosition = jobPosition;
-		this.city = city;
-		this.employer = employer;
-	}
-	
-	
 	
 }

@@ -1,21 +1,27 @@
 package com.nberimen.jobadvert;
 
 import java.time.LocalDate;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.validation.FieldError;
+import org.springframework.web.bind.MethodArgumentNotValidException;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.nberimen.core.utilities.DataResult;
-import com.nberimen.core.utilities.Result;
 import com.nberimen.jobadvert.dto.JobAdvertDto;
+import com.nberimen.utilities.result.ErrorDataResult;
 
 @RestController
 @RequestMapping("/api/jobAdverts")
@@ -29,22 +35,34 @@ public class JobAdvertController {
 	}
 
 	@PostMapping("/addAdvert")
-	public Result add(@Valid @RequestBody JobAdvertDto advertDto) {
-		return this.jobAdvertService.addAdvert(advertDto);
+	public ResponseEntity<?> add(@Valid @RequestBody JobAdvertDto advertDto) {
+		return ResponseEntity.ok( this.jobAdvertService.addAdvert(advertDto));
 	}
+	
 	@GetMapping("/getallByPage")
-	public DataResult<List<JobAdvert>> getAll(@RequestParam int pageNo,@RequestParam int pageSize) {
-		return this.jobAdvertService.getAll(pageNo, pageSize);
+	public ResponseEntity<?> getAll(@RequestParam int pageNo,@RequestParam int pageSize) {
+		return ResponseEntity.ok( this.jobAdvertService.getAll(pageNo, pageSize));
 	}
 	@GetMapping("/getAllByPublishingDate")
-	public DataResult<List<JobAdvert>> getAllByPublishingDate(@RequestParam int pageNo,@RequestParam int pageSize,
+	public ResponseEntity<?> getAllByPublishingDate(@RequestParam int pageNo,@RequestParam int pageSize,
 			@RequestParam LocalDate publishingDate) {
-		return this.jobAdvertService.getAllByPublishingDate(pageNo, pageSize,publishingDate);
+		return ResponseEntity.ok( this.jobAdvertService.getAllByPublishingDate(pageNo, pageSize,publishingDate));
 	}
 	@GetMapping("/getAllByCompanyName")
-	public DataResult<List<JobAdvert>> getByActiveAndEmployer_CompanyName(@RequestParam int pageNo,@RequestParam int pageSize
+	public ResponseEntity<?> getByActiveAndEmployer_CompanyName(@RequestParam int pageNo,@RequestParam int pageSize
 			,@RequestParam  String companyName) {
-		return this.jobAdvertService.getAllByCompanyName(pageNo, pageSize,companyName);
+		return ResponseEntity.ok(this.jobAdvertService.getAllByCompanyName(pageNo, pageSize,companyName));
+	}
+	
+	@ExceptionHandler(MethodArgumentNotValidException.class)
+	@ResponseStatus(HttpStatus.BAD_REQUEST)
+	public ErrorDataResult<Object> handleValidationException(MethodArgumentNotValidException exceptions){
+		Map<String, String> validationErrors= new HashMap<String, String>();
+		for(FieldError fieldError: exceptions.getBindingResult().getFieldErrors()) {
+			validationErrors.put(fieldError.getField(), fieldError.getDefaultMessage());
+		}
+		ErrorDataResult<Object> errors=new ErrorDataResult<Object>(validationErrors,"Doğrulama Hataları");
+		return errors;
 	}
 }
 

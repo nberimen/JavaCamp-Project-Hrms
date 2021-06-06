@@ -2,13 +2,11 @@ package com.nberimen.employer;
 
 import java.util.List;
 
-import com.nberimen.core.utilities.DataResult;
-import com.nberimen.core.utilities.Result;
-import com.nberimen.employer.dto.EmployerDto;
+import com.nberimen.utilities.result.DataResult;
+import com.nberimen.utilities.result.Result;
 
 public interface EmployerService {
 
 	public DataResult<List<Employer>> getAll();
-	public Result register(EmployerDto employerDto);
-	public DataResult<Employer> getEmployer(EmployerDto employerDto); 
+	public Result register(Employer employer);
 }

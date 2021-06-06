@@ -5,24 +5,22 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.nberimen.core.utilities.DataResult;
-import com.nberimen.core.utilities.ErrorResult;
-import com.nberimen.core.utilities.Result;
-import com.nberimen.core.utilities.SuccessDataResult;
-import com.nberimen.core.utilities.SuccessResult;
-import com.nberimen.user.UserService;
+import com.nberimen.resume.Resume;
+import com.nberimen.utilities.result.DataResult;
+import com.nberimen.utilities.result.ErrorResult;
+import com.nberimen.utilities.result.Result;
+import com.nberimen.utilities.result.SuccessDataResult;
+import com.nberimen.utilities.result.SuccessResult;
 
 @Service
 public class CandidateManager implements CandidateService {
 
 	private CandidateDao candidateDao;
-	private UserService userService;
 
 	@Autowired
-	public CandidateManager(CandidateDao candidateDao,  UserService userService) {
+	public CandidateManager(CandidateDao candidateDao) {
 		super();
 		this.candidateDao = candidateDao;
-		this.userService = userService;
 	}
 
 	@Override
@@ -32,15 +30,22 @@ public class CandidateManager implements CandidateService {
 
 	@Override
 	public Result register(Candidate candidate) {
-		String email=candidate.getUser().getEmail();
-		if(userService.getUserByEmail(email)!=null) {
+		String email=candidate.getEmail();
+		if(candidateDao.findByEmail(email)!=null) {
 			return new ErrorResult("Kayit Basarisiz: Bu e-posta kullaniliyor. ");
 		}else if(candidateDao.findByNationalityId(candidate.getNationalityId())!=null) {
 			return new ErrorResult("Kayit Basarisiz: Bu TC zaten kayitli.");
 		}
 		candidateDao.save(candidate);
-		return new SuccessResult("Kayıt başarılıı");
+		return new SuccessResult("Kayıt başarılı");
 		
+	}
+	@Override
+	public Result saveResume(Resume resume, int candidateId) {
+		Candidate candidate = candidateDao.findById(candidateId).get();
+		candidate.setResume(resume);
+		candidateDao.save(candidate);
+		return new SuccessResult("Kayıt başarılı");
 	}
 
 }

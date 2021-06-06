@@ -1,10 +1,10 @@
 package com.nberimen.employer;
 
-import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-@Repository
-public interface EmployerDao extends JpaRepository<Employer, Integer> {
+import com.nberimen.user.UserBaseDao;
 
-	Employer getById(int id);
+@Repository
+public interface EmployerDao extends UserBaseDao<Employer> {
+
 }
