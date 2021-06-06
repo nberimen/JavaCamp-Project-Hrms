@@ -4,9 +4,11 @@ import com.nberimen.user.User;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
 @AllArgsConstructor
+@NoArgsConstructor
 public class UserDto {
 	
 	private int id;
@@ -18,7 +20,7 @@ public class UserDto {
 	public UserDto(User user) { 
 		setId(user.getId());
 		setEmail(user.getEmail());
-		setVerified(user.isVerified());
+		setVerified(user.isEmailVerified());
 	}
 
 }
