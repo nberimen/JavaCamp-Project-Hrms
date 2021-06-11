@@ -10,7 +10,6 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.OrderBy;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.nberimen.education.Education;
 import com.nberimen.experience.Experience;
 import com.nberimen.language.Language;
@@ -24,7 +23,6 @@ public class Resume {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@JsonIgnore
 	private int id;
 		
 	private String profileImage;

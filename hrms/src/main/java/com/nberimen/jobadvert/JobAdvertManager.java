@@ -45,6 +45,9 @@ public class JobAdvertManager implements JobAdvertService{
 		return new SuccessDataResult<List<JobAdvert>>(this.jobAdvertDao.getByActive(true, pageable).getContent());
 	}
 
+	public DataResult<List<JobAdvert>> getAll(){
+		return new SuccessDataResult<List<JobAdvert>>(this.jobAdvertDao.findAll());
+	}
 
 	@Override
 	public DataResult<List<JobAdvert>> getAllByPublishingDate(int pageNo, int pageSize, LocalDate publishingDate) {
@@ -60,6 +63,14 @@ public class JobAdvertManager implements JobAdvertService{
 		(this.jobAdvertDao.getByActiveAndEmployer_CompanyName(true, companyName, pageable).getContent());
 	}
 
+	@Override
+	public Result changeActive(int id) {
+		JobAdvert jobAdvert=jobAdvertDao.findById(id).get();
+		jobAdvert.setActive(!jobAdvert.isActive());
+		jobAdvertDao.save(jobAdvert);
+		return new SuccessResult("İlan durumu değiştirildi.");
+		
+	}
 	public JobAdvert advertDtoToAdvert(JobAdvertDto advertDto) {
 		JobAdvert advert=new JobAdvert();
 		advert.setActive(advertDto.isActive());

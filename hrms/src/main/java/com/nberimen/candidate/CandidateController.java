@@ -10,12 +10,14 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -24,6 +26,7 @@ import com.nberimen.utilities.result.ErrorDataResult;
 
 @RestController
 @RequestMapping("/api/candidates")
+@CrossOrigin
 public class CandidateController {
 
 	private CandidateService candidateService;
@@ -38,6 +41,10 @@ public class CandidateController {
 	@GetMapping("/getall")
 	public ResponseEntity<?> getAll(){
 		return ResponseEntity.ok(this.candidateService.getAll());
+	}
+	@GetMapping("/getById")
+	public ResponseEntity<?> getById(@RequestParam int id){
+		return ResponseEntity.ok(this.candidateService.getById(id));
 	}
 	@PostMapping("/register")
 	public ResponseEntity<?>  add(@Valid @RequestBody Candidate candidate) {

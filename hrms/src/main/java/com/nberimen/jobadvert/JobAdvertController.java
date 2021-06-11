@@ -13,6 +13,7 @@ import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -37,6 +38,15 @@ public class JobAdvertController {
 	@PostMapping("/addAdvert")
 	public ResponseEntity<?> add(@Valid @RequestBody JobAdvertDto advertDto) {
 		return ResponseEntity.ok( this.jobAdvertService.addAdvert(advertDto));
+	}
+	@GetMapping("/getall")
+	public ResponseEntity<?> getAll() {
+		return ResponseEntity.ok( this.jobAdvertService.getAll());
+	}
+	
+	@PostMapping("/changeActive/{id}")
+	public ResponseEntity<?> changeActive(@PathVariable int id) {
+		return ResponseEntity.ok( this.jobAdvertService.changeActive(id));
 	}
 	
 	@GetMapping("/getallByPage")

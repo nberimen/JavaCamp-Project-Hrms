@@ -11,4 +11,5 @@ public interface CandidateService {
 	public DataResult<List<Candidate>> getAll();
 	public Result register(Candidate candidate);
 	public Result saveResume(Resume resume, int candidateId);
+	public DataResult<Candidate> getById(int id);
 }

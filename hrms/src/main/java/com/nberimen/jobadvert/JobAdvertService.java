@@ -10,6 +10,8 @@ import com.nberimen.utilities.result.Result;
 public interface JobAdvertService {
 	Result addAdvert(JobAdvertDto advertDto);
 	public DataResult<List<JobAdvert>> getAll(int pageNo, int pageSize);
+	public DataResult<List<JobAdvert>> getAll();
 	public DataResult<List<JobAdvert>> getAllByPublishingDate(int pageNo, int pageSize, LocalDate publishingDate);
 	public DataResult<List<JobAdvert>> getAllByCompanyName(int pageNo, int pageSize,String companyName);
+	public Result changeActive(int id);
 }

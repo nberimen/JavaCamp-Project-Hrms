@@ -8,7 +8,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.nberimen.resume.Resume;
 
 import lombok.Data;
@@ -20,7 +19,6 @@ public class TechnicalSkill {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@JsonIgnore
 	private int id;
 	
 	private String skillName;
@@ -28,7 +26,6 @@ public class TechnicalSkill {
 	@Enumerated(EnumType.ORDINAL)
 	private TechnicalSkillLevel skillLevel;
 	
-	@JsonIgnore
 	@ManyToOne
 	private Resume resume;
 }

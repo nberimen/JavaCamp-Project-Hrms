@@ -9,7 +9,6 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.nberimen.city.City;
 import com.nberimen.jobposition.JobPosition;
 import com.nberimen.resume.Resume;
@@ -25,7 +24,6 @@ public class Experience {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@JsonIgnore
 	private int id;
 	
 	private String companyName;
@@ -53,7 +51,6 @@ public class Experience {
 	@OneToOne(optional = false)
 	private JobPosition position;
 	
-	@JsonIgnore
 	@ManyToOne(optional = false)
 	private Resume resume;
 }

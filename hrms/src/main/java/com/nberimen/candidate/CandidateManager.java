@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.nberimen.resume.Resume;
 import com.nberimen.utilities.result.DataResult;
+import com.nberimen.utilities.result.ErrorDataResult;
 import com.nberimen.utilities.result.ErrorResult;
 import com.nberimen.utilities.result.Result;
 import com.nberimen.utilities.result.SuccessDataResult;
@@ -46,6 +47,14 @@ public class CandidateManager implements CandidateService {
 		candidate.setResume(resume);
 		candidateDao.save(candidate);
 		return new SuccessResult("Kayıt başarılı");
+	}
+
+	@Override
+	public DataResult<Candidate> getById(int id) {
+		Candidate candidate=this.candidateDao.getById(id);
+		if(candidate==null)
+			return new ErrorDataResult<>("Böyle bir aday yok.");
+		return new SuccessDataResult<>(candidate);
 	}
 
 }

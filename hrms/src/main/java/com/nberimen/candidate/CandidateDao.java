@@ -8,6 +8,7 @@ import com.nberimen.user.UserBaseDao;
 public interface CandidateDao extends UserBaseDao<Candidate> {
 
 	Candidate findByNationalityId(String nationalityId);
+	Candidate getById(int id);
 	
 	
 }

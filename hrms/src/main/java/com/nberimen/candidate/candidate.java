@@ -13,7 +13,6 @@ import javax.persistence.PrimaryKeyJoinColumn;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Pattern;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.nberimen.resume.Resume;
 import com.nberimen.user.User;
 
@@ -51,7 +50,7 @@ public class Candidate extends User{
 	@Column(length = 11,nullable = false,unique = false)
 	private String nationalityId;
 	
-	@JsonIgnore
+	
 	@OneToOne(cascade = CascadeType.ALL)
 	private Resume resume;
 }

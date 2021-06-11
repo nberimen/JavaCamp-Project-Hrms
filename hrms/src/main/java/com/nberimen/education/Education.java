@@ -9,7 +9,6 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.nberimen.language.Language;
 import com.nberimen.resume.Resume;
 import com.nberimen.utilities.department.Department;
@@ -23,7 +22,6 @@ public class Education {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@JsonIgnore
 	private int id;
 	
 	private String schoolName;
@@ -43,7 +41,6 @@ public class Education {
 	@OneToOne(optional = false)
 	private Department department;
 	
-	@JsonIgnore
 	@ManyToOne(optional = false)
 	private Resume resume;
 }
