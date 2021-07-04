@@ -34,4 +34,9 @@ public class JobAdvertDto {
 	private String cityName;
 	
 	private int employerId;
+	
+	private int typeOfWorkId;
+	
+	private int jobTypeId;
+	
 }

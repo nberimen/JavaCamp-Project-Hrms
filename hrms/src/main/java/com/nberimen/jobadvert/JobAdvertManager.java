@@ -45,6 +45,7 @@ public class JobAdvertManager implements JobAdvertService{
 		return new SuccessDataResult<List<JobAdvert>>(this.jobAdvertDao.getByActive(true, pageable).getContent());
 	}
 
+	@Override
 	public DataResult<List<JobAdvert>> getAll(){
 		return new SuccessDataResult<List<JobAdvert>>(this.jobAdvertDao.findAll());
 	}

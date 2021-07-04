@@ -11,7 +11,9 @@ import javax.persistence.ManyToOne;
 
 import com.nberimen.city.City;
 import com.nberimen.employer.Employer;
+import com.nberimen.jobType.JobType;
 import com.nberimen.jobposition.JobPosition;
+import com.nberimen.typeOfWork.TypeOfWork;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -45,6 +47,12 @@ public class JobAdvert {
 	
 	@Column(nullable = false)
 	private boolean active;
+	
+	@ManyToOne(optional = false)
+	private JobType jobType;
+	
+	@ManyToOne(optional = false)
+	private TypeOfWork typeOfWork;
 	
 	@ManyToOne(optional = false)
 	private JobPosition jobPosition;
