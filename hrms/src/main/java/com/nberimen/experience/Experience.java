@@ -10,9 +10,9 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
 import com.nberimen.city.City;
+import com.nberimen.jobType.JobType;
 import com.nberimen.jobposition.JobPosition;
 import com.nberimen.resume.Resume;
-import com.nberimen.utilities.JobType.JobType;
 import com.nberimen.utilities.industries.Industries;
 import com.nberimen.utilities.workArea.WorkArea;
 
